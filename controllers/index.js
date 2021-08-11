@@ -15,7 +15,7 @@ const router=express.Router()
 
 router.get('/',(req,res)=>
 {
-    res.send('hello world second time');
+    res.render('index');
 })
 
 module.exports=router;
