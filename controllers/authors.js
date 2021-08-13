@@ -9,7 +9,6 @@ router.get('/', async (req, res) => { //<form action="/authors" method="GET">
     if(req.query.name !=null)
     {
         searchValue.name= new RegExp(req.query.name, 'i') //  /pattern/modifier    /someshit/i
-        console.log(searchValue.name)
     }
 
     try {

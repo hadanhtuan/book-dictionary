@@ -40,9 +40,11 @@ app.use(express.static('public'))
 
 const indexController=require('./controllers/index')
 const authorsController=require('./controllers/authors')
+const booksController=require('./controllers/books')
 
 app.use('/', indexController) // dùng indexController cho tất cả route bắt đầu bằng /
 app.use('/authors', authorsController)
+app.use('/books', booksController)
 
 app.listen(process.env.PORT || 3000)
   
