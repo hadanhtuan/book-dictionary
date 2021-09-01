@@ -6,9 +6,10 @@ const Author=require('../models/author')
 router.get('/', async (req, res) => { //<form action="/authors" method="GET">
     let searchValue={}
 
-    if(req.query.name !=null)
+    if(req.query.name !=null)  // khi form có method là post thì dùng req.body, method là get thì dùng req.query
     {
         searchValue.name= new RegExp(req.query.name, 'i') //  /pattern/modifier    /someshit/i
+            setTimeout(console.log("gì "),100)
     }
 
     try {
@@ -30,11 +31,8 @@ router.get('/new', (req, res) => {
 
 //create author route
 router.post('/', async (req, res) => {
-    const author=new Author({
-        name: req.body.name
-    })
     try {
-        const newAuthor=await author.save()
+        const newAuthor=await Author.create(req.body)
         res.redirect('/authors')
     }
     catch {

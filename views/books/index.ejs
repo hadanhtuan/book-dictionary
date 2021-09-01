@@ -1,3 +1,25 @@
+<h1>Search Book</h1>
+<form action="/books" method="GET">
+
+    <div>
+        <label>Title</label>
+        <input type="text" name="title">
+    </div>
+    <div>
+        <label>Published Before</label>
+        <input type="date" name="publishedBefore" >
+    </div>
+    <div>
+        <label>Published After</label>
+        <input type="date" name="publishedAfter" >
+    </div>
+    <button type="submit">Search</button>
+</form>
+
+<% books.forEach(book => { %>
+    <img height="150" width="100" src="<%= book.coverImagePath %>">
+<% }) %>
+
 
 
 
