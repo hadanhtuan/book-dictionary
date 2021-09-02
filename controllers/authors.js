@@ -4,16 +4,32 @@ const Author=require('../models/author')
 
 //all authors route
 router.get('/', async (req, res) => { //<form action="/authors" method="GET">
-    let searchValue={}
+    // let searchValue={}
+    // const query=Author.
 
-    if(req.query.name !=null)  // khi form có method là post thì dùng req.body, method là get thì dùng req.query
+    // if(req.query.name !=null)  // khi form có method là post thì dùng req.body, method là get thì dùng req.query
+    // {
+    //     searchValue.name= new RegExp(req.query.name, 'i') //  /pattern/modifier    /someshit/i
+    //         setTimeout(console.log("gì "),100)
+    // }
+
+    // try {
+    //     const authors= await Author.find(searchValue)
+    //     res.render('authors/index', {
+    //         authors:authors,
+    //         searchValue:req.query.name
+    //     })
+    // }
+    // catch {
+    //     res.redirect('/')
+    // }
+    let query=Author.find()
+    if(req.query.name)
     {
-        searchValue.name= new RegExp(req.query.name, 'i') //  /pattern/modifier    /someshit/i
-            setTimeout(console.log("gì "),100)
+        query=query.regex('name', new RegExp(req.query.name,'i'))
     }
-
     try {
-        const authors= await Author.find(searchValue)
+        const authors=await query.exec()
         res.render('authors/index', {
             authors:authors,
             searchValue:req.query.name
