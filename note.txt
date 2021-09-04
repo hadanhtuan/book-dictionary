@@ -73,6 +73,52 @@ https://www.geeksforgeeks.org/how-does-query-prototype-exec-work-in-mongoose/
 
 
 
+Javascript là một trong những tài nguyên chặn trang, có nghĩa là việc hiển thị html có thể bị chặn hay làm chậm bởi javascript
+khi parser đọc đến tag <script> thì quá trình parse sẽ tạm dừng và execute. async và defer giúp khắc phục.
+    <script async src="script.js">  khi gặp thẻ có thuộc tính này thì vẫn parse cho đến khi download script xong thì parse html 
+    sẽ tạm dừng để execute, sau đó lại tiếp tục parse html. Xử dụng khi script là 1 module tách biệt, không phụ thuộc vào script khác
+
+    <script defer src="script.js"> parse html sẽ không dừng lại mà vẫn tiếp tục cho đến khi hoàn thành, download script file vẫn
+    được thực hiện song song và sẽ execute những script này sau khi parse xong
+
+//stringify: từ Javascript types ->JSON
+//Parse: từ JSON ->Javascript types
+
+Cài fileEncode plugin thì nó sẽ gửi về server một JSON(string), data sẽ được mã hóa thành base64 string
+
+json được trả về sau khi submit input:
+{
+    "id": "b56kpu6u9",
+    "name": "encoded-file.png",
+    "type": "image/png",
+    "size": 123456,
+    "metadata": {
+        "resize": {
+            "mode": "force",
+            "size": {
+                "width": 200,
+                "height": 200
+            }
+        },
+        "crop": {
+            "rect": {
+                "x": 0.19234,
+                "y": 0,
+                "width": 1,
+                "height": 0.61213
+            },
+            "aspectRatio": 1
+        }
+    },
+    "data": "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAA..."  //base64
+}
+
+
+dữ liệu thô là các số, ký tự, hình ảnh
+Lớp buffer dùng để lưu trữ dữ liệu thô giống như một mảng các số nguyên
+
+let buf=new Buffer(string, encoded)
+mã hóa string theo encoded rồi lưu vào, vd mã hóa "abc" theo utf-8 rồi lưu
 
 
 
@@ -81,17 +127,18 @@ https://www.geeksforgeeks.org/how-does-query-prototype-exec-work-in-mongoose/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+    // try {
+    //     const books =  Book.find()
+    //     console.log(books)
+    //     res.render('books/index', {  // phải có await để khi render thì books đã được nạp xong
+    //         books: books, 
+    //         searchOptions: req.query
+    //     })
+    //     console.log(books)
+    // }
+    // catch {
+    //     res.redirect('/')
+    // }
 
 
 
