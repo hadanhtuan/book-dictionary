@@ -17,27 +17,25 @@ const imageTypes=['image/png', 'image/jpeg', 'image/gif', 'image/jpg']
 
 
 router.get('/', async (req, res) => { // <form action="/books" method="GET">
-    let query = Book.find()
-  if (req.query.title != null && req.query.title != '') {
-    query = query.regex('title', new RegExp(req.query.title, 'i'))
-  }
-  if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
-    query = query.lte('publishDate', req.query.publishedBefore)
-  }
-  if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
-    query = query.gte('publishDate', req.query.publishedAfter)
-  }
-  try {
-    const books = await query.exec()
-    res.render('books/index', {
-      books: books,
-      searchOptions: req.query
+		let query = Book.find()
+	if (req.query.title != null && req.query.title != '') {
+		query = query.regex('title', new RegExp(req.query.title, 'i'))
+	}
+	if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
+		query = query.lte('publishDate', req.query.publishedBefore)
+	}
+	if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
+		query = query.gte('publishDate', req.query.publishedAfter)
+	}
+	try {
+		const books = await query.exec()
+		res.render('books/index', {
+			books: books,
+			searchOptions: req.query
     })
   } catch {
     res.redirect('/')
   }
-  const buf = new Buffer('1210202', "ascii")
-  console.log(buf)
 })
 
 router.get('/new', async (req, res) => {
@@ -90,8 +88,6 @@ function saveCover(book, imgEncoded)
 			book.coverImage=new Buffer.from(cover.data, 'base64')
 			book.coverImageType=cover.type
 		}
-			
-		
 	}
 	return
 }

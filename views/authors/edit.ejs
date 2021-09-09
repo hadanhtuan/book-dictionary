@@ -1,0 +1,8 @@
+<h1>Edit Author</h1>
+
+<form action="/authors/<%= author.id %>/?_method=PUT" method="POST">
+    <label>Name</label>
+    <input type="text" name="name" value="<%= author.name %>">
+    <button type="submit">Submit</button>
+</form>
+

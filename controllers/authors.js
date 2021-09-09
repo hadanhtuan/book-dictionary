@@ -1,6 +1,7 @@
 const express = require("express")
 const router=express.Router()
 const Author=require('../models/author')
+const Book=require('../models/book')
 
 //all authors route
 router.get('/', async (req, res) => { //<form action="/authors" method="GET">
@@ -45,6 +46,7 @@ router.get('/new', (req, res) => {
     res.render('authors/new')
 })
 
+
 //create author route
 router.post('/', async (req, res) => {
     try {
@@ -66,6 +68,66 @@ router.post('/', async (req, res) => {
     //         console.log(author)
     //     }
     // })
+})
+
+router.get('/:id', async (req, res)=> {
+    try {
+        const author = await Author.findById(req.params.id)
+        const book= await Book.find({author:author.id}).exec()
+        res.render('authors/show', {
+            author: author,
+            bookByAuthor: book
+        })
+    }
+    catch(err) {
+        console.log(err)
+        res.redirect('/')
+    }
+})
+
+router.get('/:id/edit', async (req, res)=> {
+    try {
+        const author = await Author.findById(req.params.id)
+        res.render('authors/edit', {
+            author: author
+        })
+    }
+    catch {
+        res.redirect('/')
+    }
+})
+
+router.put('/:id', async (req, res)=> {
+    let author
+    try {  
+        author = await Author.findById(req.params.id)
+        if(!req.body.name)
+        {
+            throw "Error updating Author"
+        }
+        author.name=req.body.name
+        await author.save()
+        res.redirect(`/authors/${author.id}`)
+    }
+    catch(err) {
+        // res.redirect(`/authors/${author.id}/edit`, {
+        res.render('authors/edit', {
+            author: author,
+            errorMessage: err.toString()
+        })
+    }
+})
+
+router.delete('/:id/', async (req, res)=> {
+    let author 
+    try {
+        author = await Author.findById(req.params.id)
+        await author.remove()
+        res.redirect('/authors')
+    }
+    catch {
+        res.redirect(`/authors/${author.id}`)
+    }
 })
 
 module.exports=router

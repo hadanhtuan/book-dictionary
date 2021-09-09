@@ -117,7 +117,7 @@ json được trả về sau khi submit input:
 dữ liệu thô là các số, ký tự, hình ảnh
 Lớp buffer dùng để lưu trữ dữ liệu thô giống như một mảng các số nguyên
 
-let buf=new Buffer(string, encoded)
+let buf=new Buffer.from(string, encoded)
 mã hóa string theo encoded rồi lưu vào, vd mã hóa "abc" theo utf-8 rồi lưu
 
 
@@ -142,12 +142,38 @@ mã hóa string theo encoded rồi lưu vào, vd mã hóa "abc" theo utf-8 rồi
 
 
 
+router.get('/:id', (req, res)=>{
+    console.log(req.params.id)
+})
+
+sau dấu : là biến có tên id
+req.params trả về các biến được định nghĩa trong URL         
 
 
+HTML form chỉ hỗ trợ method POST và GET nên muốn route đến PUT và DELETE phải cài method-override
+
+Body-parser là một middleware dùng để xử lý dữ liệu các HTTP POST request
 
 
+https://www.thanhlongdev.com/huong-dan-xay-dung-books-store-express-nodejs-phan1/
+
+res.redirect(url) là đi đến url, sau khi đi đến url thì tất nhiên là sẽ router.get(url)
+res.render(filename, data) render ra một file nằm trong views
 
 
+pre là hàm xử lý trước khi data được lưu vào csdl(mongodb). Nó là 1 middleware
+
+trong middleware thì next không có dừng những đoạn code sau nó, phải thêm return vào
+
+next() dùng để gọi middleware tiếp theo có cùng route
+next(err) với tham số là error sẽ gây "đoản mạch" và quăng error
+
+
+mongoose có 4 loại middleware
+    document middleware: save, remove, ....
+    query middleware: find,....
+
+findByIdAndDelete không phải là middleware
 
 
 

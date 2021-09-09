@@ -1,5 +1,6 @@
 const express=require('express')
 const expressLayouts = require('express-ejs-layouts')
+const methodOverride= require('method-override')
 
 const app=express();
 const bodyParser = require('body-parser')
@@ -9,7 +10,7 @@ require('dotenv').config();
 app.set('view engine', 'ejs')
 app.set('layout', 'layouts/layout') // khác với sử dụng ejs trong node-blog
 app.use(expressLayouts)
-
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 
 const indexController=require('./controllers/index')
