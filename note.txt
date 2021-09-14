@@ -176,4 +176,21 @@ mongoose có 4 loại middleware
 findByIdAndDelete không phải là middleware
 
 
+https://freetuts.net/populate-trong-mongoose-2332.html
 
+
+tất cả các loại tham số trong javascript đều là tham trị 
+Nếu truyền đối tượng vào thì tham số sẽ là 1 tham chiếu như 1 con trỏ và trỏ tới đối tượng, có thể thay đổi thuộc tính
+https://www.free-css.com/template-categories/music
+
+
+hsl(độ màu từu 0-360, màu trông như nào có hiển thị đầy đủ hay không, độ sáng)
+https://quantrimang.com/tim-hieu-sau-ve-color-trong-css-163372
+
+https://webcoban.vn/css/cach-su-dung-thuoc-tinh-box-sizing-trong-css.html
+display: flex nếu không thêm gì thì các item sẽ có độ rộng bằng content+padding+border(có nhiêu hiện nhiêu)
+Nếu sử dụng thuộc tính float, flex các phần tử inline sẽ tự động trở thành block-level
+
+ mặc định font-size ở hầu hết trình duyệt là 16px tức là 100% => 1rem = 16px
+nếu để font-size là 62.5% thì 100% được 16px  => 1rem = 10px
+rem là đơn vị tỷ lệ với font-size

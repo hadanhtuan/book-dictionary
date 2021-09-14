@@ -1,23 +1,40 @@
-<h1>Search Book</h1>
+<h1 class="title">Search Book</h1>
 <form action="/books" method="GET">
 
-    <div>
-        <label>Title</label>
-        <input type="text" name="title">
+<div class="grid wide">
+    <div class="row">
+        <div class="col l-12 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Title</label>
+                <input class="font-size-16 form-input" type="text" name="title">
+            </div>
+        </div>
+
+        <div class="col l-6 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Published Before</label>
+                <input class="font-size-16 form-input" type="date" name="publishedBefore" >
+            </div>
+        </div>
+
+        <div class="col l-6 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Published After</label>
+                <input class="font-size-16 form-input" type="date" name="publishedAfter" >
+            </div>
+        </div>
     </div>
-    <div>
-        <label>Published Before</label>
-        <input type="date" name="publishedBefore" >
-    </div>
-    <div>
-        <label>Published After</label>
-        <input type="date" name="publishedAfter" >
-    </div>
-    <button type="submit">Search</button>
+</div>
+
+<div class="btn-row form-row-end">
+    <button class="btn btn-primary" type="submit">Search</button>
+</div>
 </form>
 
 <% books.forEach(book => { %>
-    <img height="150" width="100" src="<%= book.coverImagePath %>">
+    <a href="/books/<%= book.id %>">
+        <img height="150" width="100" src="<%= book.coverImagePath %>">
+    </a>
 <% }) %>
 
 

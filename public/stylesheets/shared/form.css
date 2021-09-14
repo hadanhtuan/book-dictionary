@@ -1,0 +1,31 @@
+:root {
+    --form-input-border-color-focus: hsl(var(--color-base-hue), 100%, 80%)
+}
+
+.form-flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.form-row-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-input {
+    outline: none;
+    height: 25px;
+    background-color: white;
+    border-radius: 4px;
+    border:1px solid black;
+    padding: 2px 5px;
+    font-size: 1.6rem;
+}
+
+.form-input:focus {
+    border: 1px solid var(--form-input-border-color-focus);
+}
+
+
+

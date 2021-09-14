@@ -1,33 +1,53 @@
-<div>
-    <label>Title</label>
-    <input type="text" name="title">
-</div>
-<div>
-    <label>Author</label>
-    <select name="author">
-        <% authors.forEach( author => { %>
-            <option label="<%= author.name %>" value="<%= author.id %>"></option>
-            <!-- big brain time: phải có value ở option tại vì select mới chỉ có name để kết nối với database mà chưa có value -->
-        <% }) %>
-    </select>
-</div>
-<div>
-    <label>Publish Date</label>
-    <input type="date" name="publishDate">
-</div>
-<div>
-    <label>Page Count</label>
-    <input type="number" name="pageQuantity">
-</div>
-<div>
-    <label>Cover Image</label>
-    <input type="file" name="cover" class="filepond">
-</div>
-<div>
-    <label>Description</label>
-    <textarea type="text" name="description"></textarea>
-</div>
+<div class="grid wide">
+    <div class="row">
+        <div class="col l-6 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Title</label>
+                <input class="font-size-16 form-input" type="text" name="title" value="<%= book.title %>">
+            </div>
+        </div>
 
+        <div class="col l-6 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Author</label>
+                <select name="author" class="form-input">
+                    <% authors.forEach( author => { %>
+                        <option class="font-size-16" label="<%= author.name %>" value="<%= author.id %>"></option>
+                        <!-- big brain time: phải có value ở option tại vì select mới chỉ có name để kết nối với database mà chưa có value -->
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+
+        <div class="col l-6 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Publish Date</label>
+                <input class="font-size-16 form-input" type="date" name="publishDate" value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0]  %>">
+            </div>
+        </div>
+
+        <div class="col l-6 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Page Count</label>
+                <input class="font-size-16 form-input" type="number" name="pageQuantity" value="<%= book.pageQuantity %>">
+            </div>
+        </div>
+
+        <div class="col l-4 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Cover Image</label>
+                <input type="file" name="cover" class="filepond font-size-16">
+            </div>
+        </div>
+
+        <div class="col l-8 padding-10">
+            <div class="form-flex-column">
+                <label class="font-size-20">Description</label>
+                <textarea class="font-size-16 no-resize" type="text" name="description"><%= book.description %></textarea>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

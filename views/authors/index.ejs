@@ -1,21 +1,31 @@
-<h1>Search Author</h1>
+    <h1 class="title">Search Author</h1>
 
-<form action="/authors" method="GET">
-    <label>Name</label>
-    <input type="text" name="name" value="<%= searchValue %>">
-    <button type="submit">Search</button>
-</form>
-<br>
-<% authors.forEach( author => { %>
-    <div><%= author.name %></div>
-    <a href="/authors/<%= author.id %>">View</a>
-    <a href="/authors/<%= author.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm', {
-        url: `/authors/${author.id}`
-    }) %>
-    <br>
-<% }) %>
+    <form action="/authors" method="GET" class="padding-10">
+        <div class="form-flex-column">
 
+            <label class="font-size-20">Name</label>
+            <input class="font-size-16 form-input" type="text" name="name" value="<%= searchValue %>">
+        </div>
+        <div class="btn-row  form-row-end">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+
+    </form>
+    <div class="padding-20">
+        <% authors.forEach( author => { %>
+            <div class="padding-10">
+                <div class="font-size-20"><%= author.name %></div>
+                <div class="btn-row">
+                    <a class="btn btn-primary margin-right-25" href="/authors/<%= author.id %>">View</a>
+                    <a class="btn btn-primary margin-right-25" href="/authors/<%= author.id %>/edit">Edit</a>
+                    <%- include('../partials/deleteForm', {
+                        url: `/authors/${author.id}`
+                    }) %>
+                </div>
+            </div>
+        <% }) %>
+    
+    </div>
 
 
 

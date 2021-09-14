@@ -1,10 +1,12 @@
-<h1>New Author</h1>
+<h1 class="title">New Author</h1>
 
 <form action="/authors" method="POST">
-
     <%- include('_form_field') %>
-    <a href="/authors">Cancel</a>
-    <button type="submit">Create</button>
+
+    <div class="btn-row  form-row-end">
+        <a class="btn btn-danger margin-right-25" href="/authors">Cancel</a>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </div>
 </form>
 
 

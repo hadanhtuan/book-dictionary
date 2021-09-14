@@ -1,8 +1,12 @@
-<h1>Edit Author</h1>
+<h1 class="title">Edit Author</h1>
 
 <form action="/authors/<%= author.id %>/?_method=PUT" method="POST">
-    <label>Name</label>
-    <input type="text" name="name" value="<%= author.name %>">
-    <button type="submit">Submit</button>
+    <div class="form-flex-column">
+        <label class="font-size-20">Name</label>
+        <input class="font-size-16 form-input" type="text" name="name" value="<%= author.name %>">
+    </div>
+    <div class="btn-row  form-row-end">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
 </form>
 

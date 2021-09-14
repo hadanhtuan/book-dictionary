@@ -39,44 +39,72 @@ router.get('/', async (req, res) => { // <form action="/books" method="GET">
 })
 
 router.get('/new', async (req, res) => {
-    loadNewBook(res);
+    loadBookForm(res, new Book(), 'new');
 })
 
 router.post('/', async (req, res) => {
-    const book = new Book({
-        title: req.body.title,
-        author: req.body.author,
-        publishDate: new Date(req.body.publishDate),
-        pageQuantity: req.body.pageQuantity,
-        description: req.body.description
-    })
-    saveCover(book, req.body.cover)
-
+    let book = new Book()
+    saveBook(req, book)
+    console.log(book)
 	try {
       const newBook = await Book.create(book)
-      // res.redirect(`books/${newBook.id}`)
-      res.redirect(`books`)
+      res.redirect(`/books/${newBook.id}`)
     } catch {
-        loadNewBook(res, true)
+        loadBookForm(res, book, 'new', true)
     }
 })
 
-async function loadNewBook(res, hasError=false)
-{
-    try {
-        const authors= await Author.find({})
-        const params = {
-            authors: authors
-        }
-        if(hasError)
-            params.errorMessage = 'Error Creating Book'  // big brain time
-        res.render('books/new', params)
 
+router.get('/:id', async (req, res) => {
+    try {
+        const book= await Book.findById(req.params.id)
+        const author = await Author.findById(book.author)
+        res.render('books/show', {
+            book: book,
+            author: author
+        })
     }
     catch {
         res.redirect('/books')
     }
-}
+})
+
+router.get('/:id/edit', async (req, res) => {
+    const book = await Book.findById(req.params.id)
+    loadBookForm(res, book, 'edit')
+})
+
+router.put('/:id', async (req, res) => {
+    let book
+    try {
+        book = await Book.findById(req.params.id)
+        saveBook(req, book)
+        await book.save()
+        res.redirect(`/books/${book.id}`)
+    } 
+    catch {
+          loadBookForm(res, book, 'edit', true)
+    }
+
+})
+router.delete('/:id', async (req, res) => {
+    let book
+    try {
+        book = await Book.findById(req.params.id)
+        await book.remove()
+        res.redirect('/books')
+    }
+    catch {
+        if(book)
+        {
+            res.render('books/show', {
+                book: book,
+                errorMessage: "Error Deleting Book"
+            })
+        }
+        res.redirect('/')// big brain time
+    }
+})
 
 function saveCover(book, imgEncoded)
 {
@@ -90,6 +118,42 @@ function saveCover(book, imgEncoded)
 		}
 	}
 	return
+}
+
+function saveBook(req, book)
+{
+    book.title = req.body.title,
+    book.author = req.body.author,
+    book.publishDate = new Date(req.body.publishDate),
+    book.pageQuantity = req.body.pageQuantity,
+    book.description = req.body.description
+
+    saveCover(book, req.body.cover)
+}
+
+async function loadBookForm(res, book, formType, hasError=false)
+{
+    try {
+        const authors= await Author.find({})
+        const params = {
+            authors: authors,
+            book: book
+        }
+        if(hasError)
+        {
+            if(formType=='new') {
+                params.errorMessage = 'Error Creating Book'  // big brain time
+            }
+            else {
+                params.errorMessage = 'Error Editing Book'  
+            }
+        }
+        res.render(`books/${formType}`, params)
+
+    }
+    catch {
+        res.redirect('/books')
+    }
 }
 
 module.exports=router

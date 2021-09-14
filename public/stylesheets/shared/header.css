@@ -1,0 +1,31 @@
+:root {
+    --nav-title-font-size:4.5rem;
+    --nav-item-font-size:1.8rem
+}
+
+.nav {
+    align-items: center;
+    padding: 10px 0;
+}
+
+.nav__list {
+    display: flex!important;
+    justify-content: space-between;
+    list-style: none;
+    text-decoration: none;
+}
+
+.nav__title {
+    color: var(--color-text-light);
+    font-size: var(--nav-title-font-size);
+    text-decoration: none;
+
+}
+
+.nav__link {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-size: var(--nav-item-font-size);
+}
+
+
